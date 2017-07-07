@@ -9,8 +9,6 @@ var Results = React.createClass({
       pubdate: ""
     };
   },
-
-  // This code handles the sending of the search terms to the parent Search component
   handleClick: function(item) {
     console.log("CLICKED");
     console.log(item);
@@ -19,12 +17,8 @@ var Results = React.createClass({
       console.log(item.web_url);
     });
   },
-
-  // A helper method for mapping through our articles and outputting some HTML
   renderArticles: function() {
     return this.props.results.docs.map(function(article, index) {
-
-      // Each article thus reperesents a list group item with a known index
       return (
         <div key={index}>
           <li className="list-group-item">

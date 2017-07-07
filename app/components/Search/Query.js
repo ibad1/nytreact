@@ -76,7 +76,6 @@ var Query = React.createClass({
 
                   </div>
 
-                  {/*onClick event that triggers the HandleSubmit */}
                   <div className="pull-right">
                     <button
                       type="submit"

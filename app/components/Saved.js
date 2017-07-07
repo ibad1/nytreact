@@ -1,17 +1,11 @@
-// Include React as a dependency
 var React = require("react");
-
-// Include the Helper (for the saved recall)
 var helpers = require("../utils/helpers");
-
-// Create the Main component
 var Main = React.createClass({
 
   getInitialState: function() {
     return { savedArticles: "" };
   },
 
-  // When this component mounts, get all saved articles from our db
   componentDidMount: function() {
     helpers.getSaved().then(function(articleData) {
       this.setState({ savedArticles: articleData.data });
@@ -19,15 +13,12 @@ var Main = React.createClass({
     }.bind(this));
   },
 
-  // This code handles the deleting saved articles from our database
   handleClick: function(item) {
     console.log("CLICKED");
     console.log(item);
 
-    // Delete the list!
     helpers.deleteSaved(item.title, item.date, item.url).then(function() {
 
-      // Get the revised list!
       helpers.getSaved().then(function(articleData) {
         this.setState({ savedArticles: articleData.data });
         console.log("saved results", articleData.data);
@@ -35,7 +26,6 @@ var Main = React.createClass({
 
     }.bind(this));
   },
-  // A helper method for rendering the HTML when we have no saved articles
   renderEmpty: function() {
     return (
       <li className="list-group-item">
@@ -48,7 +38,6 @@ var Main = React.createClass({
     );
   },
 
-  // A helper method for mapping through our articles and outputting some HTML
   renderArticles: function() {
     return this.state.savedArticles.map(function(article, index) {
 
@@ -73,7 +62,6 @@ var Main = React.createClass({
     }.bind(this));
   },
 
-  // A helper method for rendering a container and all of our artiles inside
   renderContainer: function() {
     return (
       <div className="main-container">
@@ -97,16 +85,12 @@ var Main = React.createClass({
       </div>
     );
   },
-  // Our render method. Utilizing a few helper methods to keep this logic clean
   render: function() {
-    // If we have no articles, we will return this.renderEmpty() which in turn returns some HTML
     if (!this.state.savedArticles) {
       return this.renderEmpty();
     }
-    // If we have articles, return this.renderContainer() which in turn returns all saves articles
     return this.renderContainer();
   }
 });
 
-// Export the module back to the route
 module.exports = Main;
